@@ -1,3 +1,5 @@
+// Written by Barnaby Collins, 2020
+
 #include <FastLED.h>
 
 #define LED_PIN 2
@@ -14,12 +16,10 @@ int numLayers;
 // - max height
 // - time
 // - current step
-// - 
 float peaks[LAYER_SIZE][3];
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("Hello");
   delay(3000);
   FastLED.addLeds<PL9823, LED_PIN, GRB>(leds, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
@@ -31,7 +31,7 @@ void loop() {
   if (currentMillis != lastMillis && currentMillis % (int) (1000/FPS) == 0) {
     lastMillis = currentMillis;
     
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < LAYER_SIZE; i++) {
       if (peaks[i][2] >= peaks[i][1]) {
         peaks[i][0] = random(10, 51)/10;
         peaks[i][1] = random(FPS/2, FPS*2);
